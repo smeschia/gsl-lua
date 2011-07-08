@@ -1,6 +1,3 @@
-CSS: style.css
-
-
 # gsl-lua: A Lua binding for the GLS library
 ## Introduction
 **gsl-lua** is a numerical package based on the [GSL library](http://www.gnu.org/software/gsl/). It exposes a simple interface to some of the GSL library routines and data types. 
