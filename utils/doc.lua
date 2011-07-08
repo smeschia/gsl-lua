@@ -152,6 +152,7 @@ local all = {}
 printf("\n***********************\n")
 printf("## Index\n")
 
+--[[
 local len = 0
 for modname, fields in opairs(modules) do
 	local col = {"**[" .. modname .. "][]**"}
@@ -180,6 +181,20 @@ for i = 1, #all, 3 do
 		printf(string.format(fmt, all[i][j] or "", all[i+1][j] or "", 
 			all[i+2][j] or ""), "|")
 	end
+end
+--]]
+
+for modname, fields in opairs(modules) do
+	print("**[" .. modname .. "][]**\n")
+	for fldname, _ in opairs(fields) do
+		if not fldname:find("@") then
+			if mode == "lua" and trim(modname) ~= "" then
+				fldname = modname .. "." .. fldname
+			end
+			io.write(string.format(" &bull; [%s][]", fldname))
+		end
+	end
+	io.write("\n\n")
 end
 
 printf("\n\n***********************\n")

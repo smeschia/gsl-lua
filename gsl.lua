@@ -798,6 +798,8 @@ Matrices can also be sliced and indexed using a syntax similar to that of vector
 
 * **m(cond)** will return a submatrix defined by the range in row and column where *cond* is true. Elements that fall in the submatrix but do not satisfy the condition are set to NaN. *cond* can be either a function or a string (see [gsl.vector][]). The function *cond* will be called with arguments *m, i, j* (the entire matrix, the current row and the current column). In strings, *@(i, j)* represents the current element being worked on. "*" matches all elements.
 
+* **m[cond]** will return all the rows that satisfy the condition *cond* (which can be a function or a string). 
+
 * **m(cond, val)** (where *cond* is a function or a string and *val* is a function, a string or a number) will set the elements for which *cond* is true to the new value *val*. *val* can be a number (in which case all elements will be set to that number), or a function, in which case the elements will be set to the return value of the function (see also [gsl.vector][] and [gsl.vector.map][]). This operation is done in place; for an analogous operation that returns a new matrix, see [gsl.matrix.map][].
 
 @example
@@ -805,6 +807,8 @@ Matrices can also be sliced and indexed using a syntax similar to that of vector
 	m('i == 1 and j > 1')	-- {{2, 3}}
 	m('i == 1 or i == 3')	-- {{1, 2, 3}, {nan, nan, nan}, {7, 8, 9}}
 							-- elements marked as nan do not satisfy the condition
+	m['i == 1 or i == 3']	-- {{1, 2, 3}, {7, 8, 9}}
+							-- only returns rows where the condition is satisfied
 	m('*', '@(i, j)^2')		-- squares all elements
 	m('j == 2', math.pi)	-- sets all elements of the second column to pi
 
